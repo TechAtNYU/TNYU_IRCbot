@@ -33,8 +33,6 @@ class AutoImage
     if response.success?
       items = JSON.parse(response.body)['items']
       m.reply items[rand 0..9]['link'] if items
-    else
-      m.reply 'nada'
     end
   end
   
