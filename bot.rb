@@ -1,9 +1,15 @@
 require 'cinch'
 require './lib/ConfigData'
 
-# :production or :test
-# (this determines the nick of the bot and the channels it joins)
-ENVIRONMENT = :test
+# ENVIRONMENT determines the nick of the bot, the channels it joins, etc.
+# ENV['BOT_ENVIRONMENT'] should be either "production" or "test".
+# If unspecified, the default is :test. See configs/bot_config for more info.
+begin
+  ENVIRONMENT = ENV['BOT_ENVIRONMENT'].to_sym
+  raise unless ENVIRONMENT == :production
+rescue
+  ENVIRONMENT = :test
+end
 
 # Automatically include all available plugins
 $plugins = []
@@ -41,4 +47,5 @@ bot = Cinch::Bot.new do
 end
 
 # Go, daddy, go!
+puts "\nActivating TNYU_IRCbot with ENVIRONMENT = #{ENVIRONMENT} . . .\n\n"
 bot.start
