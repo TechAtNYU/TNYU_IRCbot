@@ -1,0 +1,8 @@
+# array of usernames of authorized puppet masters
+puppet_masters: [ \
+  '~wyattisim',\  # jared
+  '~JJMalina',\   # jeremiah
+  '~nateberko',\  # nate
+  '~sjkaliski',\  # steve
+  '~Adium'\       # misha
+]
