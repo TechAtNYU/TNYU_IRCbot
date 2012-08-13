@@ -5,6 +5,8 @@ require 'google/api_client'
 # 
 # General format:  [query].[file_type]
 # 
+# @author wyattisimo
+# 
 class AutoImage
   include Cinch::Plugin
   
