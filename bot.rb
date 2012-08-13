@@ -31,15 +31,16 @@ bot = Cinch::Bot.new do
     c.channels = config[:channels]
     c.nick = config[:nick]
     if config.has_key? :username
+      c.user = config[:username]
       c.sasl.username = config[:username]
-      c.sasl.password = ENV['IRC_PASSWORD']
+      c.sasl.password = ENV['IRC_PASSWORD'].dup # dup to make it mutable
     end
     c.plugins.plugins = $plugins
     c.plugins.prefix = nil
   end
   
-  on :op do |m|
-    if m.user == bot_name
+  on :op do |m, opped_user|
+    if opped_user == config[:nick]
       msgs = ConfigData.new :op_msgs, {do_parse: false}
       m.reply msgs.array[rand 0..(msgs.array.count-1)] if msgs.has_data?
     end
