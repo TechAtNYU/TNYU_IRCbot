@@ -1,0 +1,14 @@
+# tnyubot configuration options
+
+production: { \
+  server:   'chat.freenode.net', \
+  channels: ['#tech@nyu'], \
+  nick:     'tnyubot', \
+  username: 'tnyubot' \  # make sure env var IRC_PASSWORD is set to authenticate
+}
+
+test: { \
+  server:   'chat.freenode.net', \
+  channels: ['#cinch-bots'], \
+  nick:     'tnyubot-test' \
+}
