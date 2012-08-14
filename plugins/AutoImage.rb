@@ -10,11 +10,13 @@ require 'google/api_client'
 class AutoImage
   include Cinch::Plugin
   
-  match /^([\w-]+)\.(gif|jpg|png)$/, :react_on => :channel
+  match /^([\w'-_!]+)\.(gif|jpg|jpeg|png)$/, :react_on => :channel
   
   def execute(m, query, file_type)
     
-    query.gsub! /-/, ' '
+    query.gsub! /[-_]+/, ' '
+    
+    file_type = 'jpg' if file_type == 'jpeg'
     
     # search
     client = Google::APIClient.new(
