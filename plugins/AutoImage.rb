@@ -30,13 +30,14 @@ class AutoImage
         'key' => ENV['GOOGLE_API_KEY'],
         'cx' => ENV['GOOGLE_CSE_ID'],
         'searchType' => 'image',
-        'fileType' => file_type
+        'fileType' => file_type,
+        'filter' => 1 # enable duplicate content filter
       }).response
     
     # Post an image link (randomly choose from top ten search results)
     if response.success?
       items = JSON.parse(response.body)['items']
-      m.reply items[rand 0..9]['link'].gsub(/\?.*$/, '') if items
+      m.reply items[rand 0..items.size]['link'].gsub(/\?.*$/, '') if items
     end
   end
   
