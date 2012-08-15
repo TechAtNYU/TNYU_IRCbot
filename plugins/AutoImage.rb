@@ -10,7 +10,7 @@ require 'google/api_client'
 class AutoImage
   include Cinch::Plugin
   
-  match /^([\w-]+)\.(gif|jpg|png)$/, :react_on => :channel
+  match /^([\w-]+)\.(gif|jpg|png)/, :react_on => :channel
   
   def execute(m, query, file_type)
     
