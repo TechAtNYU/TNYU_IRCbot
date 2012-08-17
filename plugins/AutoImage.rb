@@ -37,6 +37,7 @@ class AutoImage
     # Post an image link (randomly choose from top ten search results)
     if response.success?
       items = JSON.parse(response.body)['items']
+puts "SUCCESS #{items[rand 0..items.size]['link'].gsub(/\?.*$/, '')}"
       m.reply items[rand 0..items.size]['link'].gsub(/\?.*$/, '') if items
     end
   end
