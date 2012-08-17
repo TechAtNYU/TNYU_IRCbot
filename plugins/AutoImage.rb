@@ -10,15 +10,12 @@ require 'google/api_client'
 class AutoImage
   include Cinch::Plugin
   
-  match /^([\w'-_!]+)\.(gif|jpg|jpeg|png)$/, :react_on => :channel
+  match /([\w'-_!]+)\.(gif|jpg|jpeg|png)/, :react_on => :channel
   
   def execute(m, query, file_type)
     
-puts "HAI 1"
     query.gsub! /[-_]+/, ' '
-puts "HAI 2"
     file_type = 'jpg' if file_type == 'jpeg'
-puts "HAI 3"
     
     # search
     client = Google::APIClient.new(
@@ -33,14 +30,12 @@ puts "HAI 3"
         'cx' => ENV['GOOGLE_CSE_ID'],
         'searchType' => 'image',
         'fileType' => file_type,
-        'filter' => 1 # enable duplicate content filter
+        'filter' => '1' # enable duplicate content filter
       }).response
-puts "#{response}"
     
     # Post an image link (randomly choose from top ten search results)
     if response.success?
       items = JSON.parse(response.body)['items']
-puts "SUCCESS #{items[rand 0..items.size]['link'].gsub(/\?.*$/, '')}"
       m.reply items[rand 0..items.size]['link'].gsub(/\?.*$/, '') if items
     end
   end
