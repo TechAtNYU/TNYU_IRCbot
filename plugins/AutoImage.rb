@@ -33,6 +33,7 @@ class AutoImage
         'fileType' => file_type,
         'filter' => 1 # enable duplicate content filter
       }).response
+puts "#{response}"
     
     # Post an image link (randomly choose from top ten search results)
     if response.success?
