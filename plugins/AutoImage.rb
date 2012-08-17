@@ -1,7 +1,7 @@
 require 'google/api_client'
 
 # This runs a Google image search and posts a relevant image link when a user
-# in the channel provides a file name on its own line matching the regex below.
+# in the channel provides a file name matching the regex below.
 # 
 # General format:  [query].[file_type]
 # 
@@ -10,7 +10,7 @@ require 'google/api_client'
 class AutoImage
   include Cinch::Plugin
   
-  match /^([\w'-_!]+)\.(gif|jpg|jpeg|png)$/, :react_on => :channel
+  match /([\w'-_!]+)\.(gif|jpg|jpeg|png)/, :react_on => :channel
   
   def execute(m, query, file_type)
     
