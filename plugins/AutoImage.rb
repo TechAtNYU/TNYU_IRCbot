@@ -14,9 +14,11 @@ class AutoImage
   
   def execute(m, query, file_type)
     
+puts "HAI 1"
     query.gsub! /[-_]+/, ' '
-    
+puts "HAI 2"
     file_type = 'jpg' if file_type == 'jpeg'
+puts "HAI 3"
     
     # search
     client = Google::APIClient.new(
